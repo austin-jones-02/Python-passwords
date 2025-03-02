@@ -18,17 +18,29 @@ nums = string.digits
 special_chars = string.punctuation
 
 
-def create_password(options="all", length="8"):
+def create_password(options="all", length=8):
+    # Initialize character pool (What the password will pick from for creation)
     char_pool = ""
 
-    match options.lower():
-        case "l":
-            char_pool += lower_chars
-        case "all":
-            char_pool += lower_chars + upper_chars + nums + special_chars
+    if "l" in options or options.lower() == "all":
+        char_pool += lower_chars
+    if "u" in options or options.lower() == "all":
+        char_pool += upper_chars
+    if "n" in options or options.lower() == "all":
+        char_pool += nums
+    if "s" in options or options.lower() == "all":
+        char_pool += special_chars
 
-    return char_pool
+    print(f"Character pool used for password: {char_pool}")
+    password = "".join([random.choice(char_pool) for _ in range(length + 1)])
+
+    return password
 
 
 if __name__ == '__main__':
-    print(create_password())
+    print(f"Password with only lower: {create_password("l")}")
+    print(f"\nPassword with lower and upper: {create_password("ul")}")
+    print(
+        f"\nPassword with lower and upper and nums: {create_password("nlu")}")
+    print(
+        f"\nPassword with lower and upper and nums: {create_password("slun")}")
