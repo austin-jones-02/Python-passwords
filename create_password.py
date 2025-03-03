@@ -11,6 +11,7 @@ Note:
 
 import string
 import random
+import time
 
 lower_chars = string.ascii_lowercase
 upper_chars = string.ascii_uppercase
@@ -19,6 +20,8 @@ special_chars = string.punctuation
 
 
 def create_password_random_before(options="all", length=8):
+    start = time.perf_counter()
+
     # Initialize character pool (What the password will pick from for creation)
     char_pool = ""
 
@@ -41,10 +44,14 @@ def create_password_random_before(options="all", length=8):
 
     password = "".join([random.choice(char_pool) for _ in range(length + 1)])
 
+    end = time.perf_counter()
+    print(f"Random generation BEFORE runtime: {end - start:.6f}")
     return password
 
 
 def create_password_random_after(options="all", length=8):
+    start = time.perf_counter()
+
     # Initialize character pool (What the password will pick from for creation)
     char_pool = ""
 
@@ -60,6 +67,8 @@ def create_password_random_after(options="all", length=8):
     print(f"Character pool used for password: {char_pool}")
     password = "".join([random.choice(char_pool) for _ in range(length + 1)])
 
+    end = time.perf_counter()
+    print(f"Random generation AFTER runtime: {end - start:.6f}")
     return password
 
 
