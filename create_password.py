@@ -1,21 +1,44 @@
-"""
-Holds the functions to create password
-
-Note:
-    Not sure what all will be needed... probably should have options for password to include:
-        - Lowercase
-        - Uppercase
-        - Numbers
-        - Randomized symbols aka special chars
-"""
-
 import string
 import random
+import argparse
 
 lower_chars = string.ascii_lowercase
 upper_chars = string.ascii_uppercase
 nums = string.digits
 special_chars = string.punctuation
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Generate a password and save to a txt file on desktop."
+    )
+    parser.add_argument(
+        "options_or_length",
+        nargs='?',
+        default="all",
+        help="Either options (l/u/n/s/all) or just the length as a number."
+    )
+    parser.add_argument(
+        "length",
+        nargs='?',
+        default=None,
+        type=int,
+        help="Length of password to be generated."
+    )
+
+    args = parser.parse_args()
+
+    # Check if first argument is a number (length)
+    try:
+        length = int(args.options_or_length)
+        options = "all"  # Use default options
+    except ValueError:
+        # First argument is options
+        options = args.options_or_length
+        length = args.length if args.length is not None else 8
+
+    password = create_password_random(options, length)
+    print(f"Password: {password}\nOptions: {options}\nLength: {length}")
 
 
 def create_password_random(options="all", length=8):
@@ -31,13 +54,10 @@ def create_password_random(options="all", length=8):
     if "s" in options or options.lower() == "all":
         char_pool += special_chars
 
-    password = "".join([random.choice(char_pool) for _ in range(length + 1)])
+    password = "".join([random.choice(char_pool) for _ in range(length)])
 
     return password
 
 
-if __name__ == '__main__':
-    print(create_password_random('l', 10))
-    print(create_password_random('lu', 10))
-    print(create_password_random('lun', 10))
-    print(create_password_random('all', 10))  # also could do "luns"
+if __name__ == "__main__":
+    main()
