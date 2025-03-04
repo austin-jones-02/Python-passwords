@@ -1,4 +1,4 @@
-# password-manager-py
+# Python-passwords
 
 A simple password manager that can generate a password with various options and length.
 
