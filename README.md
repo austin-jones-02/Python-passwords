@@ -17,9 +17,10 @@ A simple password manager that can generate a password with various options and 
 ## Usage:
 
 ```powershell
-py create_password.py # Default options. Generates a password with lower and upper-case letters, numbers, and special characters.
+py create_password.py # Default options. Generates a password with lower and upper-case letters,
+                      # numbers, and special characters.
 
-py create_password.py lns 20 # Generates a password with lowercase letters, numbers, and special characters.
+py create_password.py ln 20 # Generates a password with lowercase letters and numbers.
 
 py create_password.py 15 # Generates a password with all options and a length of 15.
 ```
