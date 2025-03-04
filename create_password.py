@@ -53,8 +53,7 @@ def main():
                 os.environ["USERPROFILE"]), "Desktop")
             name = "password_vault.txt"
 
-            use_for_password = input(
-                "The name or thing that the password is for: ")
+            use_for_password = input("Service or account name: ")
 
             file = open(os.path.join(path, name), "a")
             file.write(f"{use_for_password}: {password}\n")
